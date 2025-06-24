@@ -1,0 +1,22 @@
+{% extends "app/layout.html" %}
+
+{% block title %}LISTS{% endblock %}
+
+{% block content %}
+<h2>Here are the tweets</h2>
+<a href="{% url 'add_tweet' %}" class="btn btn-primary">Add Tweet</a>
+<div class="d-flex flex-wrap gap-3">
+    {% for tweet in tweets %}
+    <div class="card" style="width: 18rem;">
+        <img src="{{ tweet.photo.url }}" class="card-img-top" alt="tweet_images">
+        <div class="card-body">
+            <h5 class="card-title">{{user.username}}</h5>
+            {% if tweet.user==user%}
+            <a href="{% url "edit_tweet" tweet.id %}" class="btn btn-primary">Edit</a>
+            <a href="{% url "delete_tweet" tweet.id %}" class="btn btn-danger">Delete</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
